@@ -14,8 +14,8 @@ export class PostsComponent implements OnInit {
 
   constructor(private service: PostService) {}
   ngOnInit() {
-    this.service.getPosts().subscribe(response => {
-      this.posts = response as any[];
+    this.service.getAll().subscribe((posts: any[]) => {
+      this.posts = posts;
     });
   }
 
@@ -23,16 +23,19 @@ export class PostsComponent implements OnInit {
     let post = {
       title: input.value
     };
+    this.posts.splice(0, 0, post);
+
     input.value = "";
 
-    this.service.createPost(JSON.stringify(post)).subscribe(
-      (response: any) => {
-        console.log(response);
-        post["id"] = response.id;
+    this.service.create(JSON.stringify(post)).subscribe(
+      (newPost: any) => {
+        console.log(newPost);
+        post["id"] = newPost.id;
         this.posts as any[];
-        this.posts.splice(0, 0, post);
       },
       (error: AppError) => {
+        this.posts.splice(0, 1);
+
         if (error instanceof BadInputError) {
           alert("This input data is incorrect, the post can not be created!");
           console.log(error);
@@ -42,28 +45,21 @@ export class PostsComponent implements OnInit {
   }
 
   updatePost(post) {
-    this.service
-      .updatePost(
-        post.id,
-        JSON.stringify({ title: "Pozdrav iz popovog polja" })
-      )
-      .subscribe((response: any) => {
-        console.log(response);
-      });
+    this.service.update(post).subscribe((post: any) => {
+      console.log(post);
+    });
   }
 
   deletePost(post) {
-    this.service.deletePost(post.id).subscribe(
-      (response: any) => {
-        console.log(response);
-        let index = this.posts.indexOf(post);
-        this.posts.splice(index, 1);
-      },
-      (error: AppError) => {
-        if (error instanceof NotFoundError) {
-          alert("This post has already been deleted");
-        } else throw error;
-      }
-    );
+    let index = this.posts.indexOf(post);
+    this.posts.splice(index, 1);
+
+    this.service.delete(post.id).subscribe(null, (error: AppError) => {
+      this.posts.splice(index, 0, post);
+
+      if (error instanceof NotFoundError) {
+        alert("This post has already been deleted");
+      } else throw error;
+    });
   }
 }
