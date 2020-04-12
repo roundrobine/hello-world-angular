@@ -20,7 +20,7 @@ export class PostsComponent implements OnInit {
   }
 
   addNewPost(input: HTMLInputElement) {
-    let post = {
+    const post = {
       title: input.value
     };
     this.posts.splice(0, 0, post);
@@ -30,7 +30,7 @@ export class PostsComponent implements OnInit {
     this.service.create(JSON.stringify(post)).subscribe(
       (newPost: any) => {
         console.log(newPost);
-        post["id"] = newPost.id;
+        post.id = newPost.id;
         this.posts as any[];
       },
       (error: AppError) => {
@@ -39,7 +39,7 @@ export class PostsComponent implements OnInit {
         if (error instanceof BadInputError) {
           alert("This input data is incorrect, the post can not be created!");
           console.log(error);
-        } else throw error;
+        } else { throw error; }
       }
     );
   }
@@ -51,7 +51,7 @@ export class PostsComponent implements OnInit {
   }
 
   deletePost(post) {
-    let index = this.posts.indexOf(post);
+    const index = this.posts.indexOf(post);
     this.posts.splice(index, 1);
 
     this.service.delete(post.id).subscribe(null, (error: AppError) => {
@@ -59,7 +59,7 @@ export class PostsComponent implements OnInit {
 
       if (error instanceof NotFoundError) {
         alert("This post has already been deleted");
-      } else throw error;
+      } else { throw error; }
     });
   }
 }

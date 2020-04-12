@@ -32,9 +32,9 @@ export class DataService {
     }
 
     private errorHandler(error: HttpErrorResponse) {
-        if (error.status === 404) return throwError(new NotFoundError());
-        else if (error.status === 400)
+        if (error.status === 404) { return throwError(new NotFoundError()); } else if (error.status === 400) {
             return throwError(new BadInputError(error));
+ }
         return throwError(new AppError(error));
     }
 }

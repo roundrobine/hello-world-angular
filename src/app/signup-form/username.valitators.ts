@@ -16,7 +16,7 @@ export class UsernameValidators {
       setTimeout(() => {
         if (control.value === "dimo") {
           resolve({ shouldBeUnique: true });
-        } else resolve(null);
+        } else { resolve(null); }
       }, 2000);
     });
   }

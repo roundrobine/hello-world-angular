@@ -37,7 +37,7 @@ export class AppComponent {
   }
 
   onRemove(course) {
-    let index = this.courses.indexOf(course);
+    const index = this.courses.indexOf(course);
     this.courses.splice(index, 1);
   }
 

@@ -1,7 +1,7 @@
 import { InputFormatDirective } from "./input-format.directive";
 
 describe("InputFormatDirective", () => {
-    let elRefMock = {
+    const elRefMock = {
         nativeElement: document.createElement("div"),
     };
     it("should create an instance", () => {
