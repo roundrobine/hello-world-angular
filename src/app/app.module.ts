@@ -8,7 +8,7 @@ import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { CoursesComponent } from "./courses.component";
+// import { CoursesComponent } from "./courses.component";
 import { CourseComponent } from "./course/course.component";
 import { CoursesService } from "./courses.service";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -31,48 +31,51 @@ import { GithubProfileComponent } from "./github-profile/github-profile.componen
 import { NotFoundComponent } from "./not-found/not-found.component";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CoursesComponent,
-    CourseComponent,
-    SummaryPipe,
-    FavoriteComponent,
-    PanelComponent,
-    LikeComponent,
-    InputFormatDirective,
-    ZippyComponent,
-    ContactFormComponent,
-    NewCourseFormComponent,
-    SignupFormComponent,
-    UltimateCourseFormComponent,
-    ChangePasswordComponent,
-    PostsComponent,
-    GithubFollowersComponent,
-    NavbarComponent,
-    HomeComponent,
-    GithubProfileComponent,
-    NotFoundComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    RouterModule.forRoot([
-      { path: "", component: HomeComponent },
-      { path: "followers/:id/:username", component: GithubProfileComponent },
-      { path: "followers", component: GithubFollowersComponent },
-      { path: "posts", component: PostsComponent },
-      { path: "**", component: NotFoundComponent }
-    ])
-  ],
-  providers: [
-    CoursesService,
-    PostService,
-    GithubService,
-    { provide: ErrorHandler, useClass: AppErrorHandler }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        // CoursesComponent,
+        CourseComponent,
+        SummaryPipe,
+        FavoriteComponent,
+        PanelComponent,
+        LikeComponent,
+        InputFormatDirective,
+        ZippyComponent,
+        ContactFormComponent,
+        NewCourseFormComponent,
+        SignupFormComponent,
+        UltimateCourseFormComponent,
+        ChangePasswordComponent,
+        PostsComponent,
+        GithubFollowersComponent,
+        NavbarComponent,
+        HomeComponent,
+        GithubProfileComponent,
+        NotFoundComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        RouterModule.forRoot([
+            { path: "", component: HomeComponent },
+            {
+                path: "followers/:id/:username",
+                component: GithubProfileComponent,
+            },
+            { path: "followers", component: GithubFollowersComponent },
+            { path: "posts", component: PostsComponent },
+            { path: "**", component: NotFoundComponent },
+        ]),
+    ],
+    providers: [
+        CoursesService,
+        PostService,
+        GithubService,
+        { provide: ErrorHandler, useClass: AppErrorHandler },
+    ],
+    bootstrap: [AppComponent],
 })
 export class AppModule {}
