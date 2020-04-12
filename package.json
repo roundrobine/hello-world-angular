@@ -8,7 +8,8 @@
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
-        "deploy:gh": "ng build --prod --base-href 'https://roundrobine.github.io/hello-world-angular/' && ngh --dir dist/hello-world"
+        "deploy:gh": "ng build --prod --base-href 'https://roundrobine.github.io/hello-world-angular/' && ngh --dir dist/hello-world",
+        "deploy:firebase": "ng build --prod && firebase deploy"
     },
     "private": true,
     "dependencies": {
